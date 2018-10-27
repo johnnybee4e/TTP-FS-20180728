@@ -33,6 +33,7 @@ router.get('/translate', async (req, res, next) => {
 router.get('/random', async (req, res, next) => {
   try {
     const randomGif = await client.random('gifs', {});
+    console.log(randomGif)
     res.json(randomGif.data);
   } catch (err) {
     console.error(err);
