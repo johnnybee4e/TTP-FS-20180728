@@ -2,7 +2,7 @@
   "name": "amex-code-test",
   "version": "1.0.0",
   "description": "Server for React App leveraging GIPHY API",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start-dev": "NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
