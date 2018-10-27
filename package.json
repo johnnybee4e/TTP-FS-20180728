@@ -2,14 +2,17 @@
   "name": "amex-code-test",
   "version": "1.0.0",
   "description": "Server for React App leveraging GIPHY API",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
+    "start-dev": "NODE_ENV='development' npm run start-server",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jonathan Rosado",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "giphy-js-sdk-core": "^1.0.6",
     "morgan": "^1.9.1",
