@@ -14,18 +14,21 @@ class Home extends Component {
     this.setState({ gifs: trendingGifs.data });
   }
 
-  async handleRandom() {
-    const randomGif = axios.get('/api/random');
-    this.setState({ gifs: randomGif.data });
-  }
+  handleRandom = async () => {
+    console.log('random clicked');
+    const randomGif = await axios.get('/api/random');
+    console.log(randomGif.data)
+    // this.setState({ gifs: [randomGif] });
+  };
 
   async handleTranslate(phrase) {
     const translateGifs = await axios.post('/api/translate', phrase);
-    this.setState({ gifs: translateGifs.data });
+    console.log(translateGifs)
+    // this.setState({ gifs: translateGifs.data });
   }
 
-  async handleSearch(query) {
-    const searchGifs = await axios.post('/api/search', query);
+  async handleSearch(searchParams) {
+    const searchGifs = await axios.post('/api/search', searchParams);
     this.setState({ gifs: searchGifs.data });
   }
 
@@ -37,9 +40,9 @@ class Home extends Component {
     return (
       <div className="App">
         <h1>Welcome to the Gif Factory</h1>
-        <SearchBar props="" />
+        <SearchBar handleRandom={this.handleRandom} />
         {gifs.map(gif => (
-          <GifCard key={gif.title} props={gif} />
+          <GifCard key={gif.url} props={gif} />
         ))}
       </div>
     );
