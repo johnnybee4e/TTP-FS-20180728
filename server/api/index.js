@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// require('dotenv').config();
 const GphApiClient = require('giphy-js-sdk-core');
 const client = GphApiClient(process.env.GIPHY_API_KEY);
 
@@ -12,7 +11,17 @@ router.get('/trending', async (req, res, next) => {
   }
 });
 
-router.get('/search', async (req, res, next) => {
+router.get('/random', async (req, res, next) => {
+  try {
+    const randomGif = await client.random('gifs', {});
+    console.log(randomGif)
+    res.json(randomGif.data);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.post('/search', async (req, res, next) => {
   try {
     const queryGifs = await client.search('gifs', { q: 'searched term' });
     res.json(queryGifs.data);
@@ -21,7 +30,7 @@ router.get('/search', async (req, res, next) => {
   }
 });
 
-router.get('/translate', async (req, res, next) => {
+router.post('/translate', async (req, res, next) => {
   try {
     const gifTranslation = await client.translate({ s: 'bananas in pajamas' });
     res.json(gifTranslation.data);
@@ -30,13 +39,5 @@ router.get('/translate', async (req, res, next) => {
   }
 });
 
-router.get('/random', async (req, res, next) => {
-  try {
-    const randomGif = await client.random('gifs', {});
-    res.json(randomGif.data);
-  } catch (err) {
-    console.error(err);
-  }
-});
 
 module.exports = router;
