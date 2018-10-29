@@ -5,6 +5,9 @@ const morgan = require('morgan');
 
 if (process.env.NODE_ENV !== 'production') require('../secrets');
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
