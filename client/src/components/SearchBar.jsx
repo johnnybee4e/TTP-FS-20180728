@@ -2,11 +2,11 @@ import React from 'react';
 import { SearchField } from './index';
 
 export default function SearchBar(props) {
-  const { handleChange, handleSearch, handleTranslate, handleRandom } = props;
+  const { handleHomeChange, handleSearch, handleTranslate, handleRandom } = props;
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <SearchField
-        handleChange={handleChange}
+        handleHomeChange={handleHomeChange}
         handleSearch={handleSearch}
         handleTranslate={handleTranslate}
       />

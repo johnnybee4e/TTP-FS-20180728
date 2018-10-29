@@ -7,6 +7,7 @@ class Home extends Component {
     super(props);
     this.state = {
       gifs: [],
+      randomGif: {},
     };
   }
   async componentDidMount() {
@@ -15,32 +16,40 @@ class Home extends Component {
   }
 
   handleRandom = async () => {
-    console.log('random clicked');
-    const randomGif = await axios.get('/api/random');
-    console.log(randomGif.data)
-    // this.setState({ gifs: [randomGif] });
+    const { data } = await axios.get('/api/random');
+    this.setState({ randomGif: data });
   };
 
-  async handleTranslate(phrase) {
-    const translateGifs = await axios.post('/api/translate', phrase);
-    console.log(translateGifs)
+  handleTranslate = async phrase => {
+    const toTranslate = { s: phrase };
+    const { data } = await axios.post('/api/translate', toTranslate);
+    console.log(data);
     // this.setState({ gifs: translateGifs.data });
-  }
+  };
 
-  async handleSearch(searchParams) {
-    const searchGifs = await axios.post('/api/search', searchParams);
-    this.setState({ gifs: searchGifs.data });
-  }
+  handleSearch = async searchParams => {
+    const searchQuery = { q: searchParams };
+    const { data } = await axios.post('/api/search', searchQuery);
+    console.log('search result', data);
+    this.setState({ gifs: data });
+  };
 
-  handleChange(evt) {
+  handleHomeChange = async evt => {
     evt.preventDefault();
-  }
+    console.log('Home change fired');
+  };
   render() {
     const { gifs } = this.state;
+    console.log('random gif from state', this.state.randomGif);
     return (
       <div className="App">
         <h1>Welcome to the Gif Factory</h1>
-        <SearchBar handleRandom={this.handleRandom} />
+        <SearchBar
+          handleRandom={this.handleRandom}
+          handleSearch={this.handleSearch}
+          handleTranslate={this.handleTranslate}
+          handleHomeChange={this.handleHomeChange}
+        />
         {gifs.map(gif => (
           <GifCard key={gif.url} props={gif} />
         ))}

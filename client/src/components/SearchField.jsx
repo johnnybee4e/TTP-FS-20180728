@@ -7,40 +7,45 @@ export default class SearchField extends Component {
 
     this.state = {
       endpoint: '',
-      q: '',
-      s: '',
+      input: ''
     };
   }
 
   componentDidMount() {
-    if (!this.state.endpoint) this.setState({ endpoint: "search" });
+    if (!this.state.endpoint) this.setState({ endpoint: 'search' });
   }
-  handleChange = evt => {
+  handleChange = async evt => {
     this.setState({
       [evt.target.name]: evt.target.value,
     });
+    console.log(
+      'target name',
+      evt.target.name,
+      'input',
+      this.state.input,
+      'endpoint',
+      this.state.endpoint
+    );
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
-    const { endpoint, q, s } = this.state;
+    console.log('submit clicked');
+    console.log('props', this.props);
+    const { endpoint, input } = this.state
+    console.log('endpoint!', endpoint);
     endpoint === 'search'
-      ? this.props.handleSearch(q)
-      : this.props.handleTranslate(s);
+      ? this.props.handleSearch(input)
+      : this.props.handleTranslate(input);
     this.setState({
-      endpoint: 'search',
-      q: '',
-      s: '',
+      endpoint: 'search'  ,
+      input: ''
     });
   };
 
   render() {
     return (
-      <form
-        className="form-inline my-2 my-lg-0"
-        id="form-container"
-        onSubmit={this.handleSubmit}
-      >
+      <form className="" id="form-container" onSubmit={this.handleSubmit}>
         <label>Search or Translate?</label>
         <select
           onChange={evt => {
@@ -48,21 +53,19 @@ export default class SearchField extends Component {
             this.handleChange(evt);
           }}
         >
-          <option defaultValue="search">
-            Search
-          </option>
+          <option value="search">Search</option>
           <option value="translate">Translate</option>
         </select>
         <input
-          value={this.state.endpoint === 'search' ? this.state.q : this.state.s}
-          name={this.state.endpoint === 'search' ? this.state.q : this.state.s}
+          value={this.state.input}
+          name='input'
           onChange={this.handleChange}
-          className="form-control mr-sm-2"
+          className=""
           type="search"
           placeholder={`${this.state.endpoint}`}
           aria-label="Search"
         />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <button className="" type="submit">
           Submit
         </button>
       </form>
