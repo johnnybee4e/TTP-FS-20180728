@@ -17,7 +17,6 @@ class Home extends Component {
   };
   handleRandom = async () => {
     const { data } = await axios.get('/api/random');
-    console.log(data);
     this.setState({ gifs: [data] });
   };
 
@@ -28,16 +27,13 @@ class Home extends Component {
   };
 
   handleSearch = async (searchParams, currRating) => {
-    console.log('handle search fired!');
     const searchQuery = { q: searchParams, rating: currRating };
     const { data } = await axios.post('/api/search', searchQuery);
-    console.log('data', data);
     this.setState({ gifs: data });
   };
 
   render() {
     const { gifs } = this.state;
-    console.log(gifs);
     return (
       <div>
         <h1>Welcome to the Gif Factory</h1>

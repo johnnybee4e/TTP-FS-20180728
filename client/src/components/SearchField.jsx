@@ -21,7 +21,6 @@ export default class SearchField extends Component {
     this.setState({
       [name]: value,
     });
-    console.log("state property", name, "is changed to", value);
   };
 
   handleSubmit = evt => {
