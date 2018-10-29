@@ -11,26 +11,24 @@ class Home extends Component {
     };
   }
   async componentDidMount() {
-    const trendingGifs = await axios.get('/api/trending');
-    this.setState({ gifs: trendingGifs.data });
+    const { data } = await axios.get('/api/trending');
+    this.setState({ gifs: data });
   }
 
   handleRandom = async () => {
     const { data } = await axios.get('/api/random');
-    this.setState({ randomGif: data });
+    this.setState({ gifs: [data] });
   };
 
   handleTranslate = async phrase => {
     const toTranslate = { s: phrase };
     const { data } = await axios.post('/api/translate', toTranslate);
-    console.log(data);
-    // this.setState({ gifs: translateGifs.data });
+    this.setState({ gifs: [data] });
   };
 
   handleSearch = async searchParams => {
     const searchQuery = { q: searchParams };
     const { data } = await axios.post('/api/search', searchQuery);
-    console.log('search result', data);
     this.setState({ gifs: data });
   };
 

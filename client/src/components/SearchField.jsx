@@ -7,7 +7,7 @@ export default class SearchField extends Component {
 
     this.state = {
       endpoint: '',
-      input: ''
+      input: '',
     };
   }
 
@@ -32,14 +32,13 @@ export default class SearchField extends Component {
     evt.preventDefault();
     console.log('submit clicked');
     console.log('props', this.props);
-    const { endpoint, input } = this.state
+    const { endpoint, input } = this.state;
     console.log('endpoint!', endpoint);
     endpoint === 'search'
       ? this.props.handleSearch(input)
       : this.props.handleTranslate(input);
     this.setState({
-      endpoint: 'search'  ,
-      input: ''
+      input: '',
     });
   };
 
@@ -58,7 +57,7 @@ export default class SearchField extends Component {
         </select>
         <input
           value={this.state.input}
-          name='input'
+          name="input"
           onChange={this.handleChange}
           className=""
           type="search"
