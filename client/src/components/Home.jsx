@@ -6,14 +6,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gifs: []
+      gifs: [],
+      rating: ''
     };
   }
   async componentDidMount() {
     this.handleTrending()
   }
 
-  handleTrending = async () => {
+  handleTrending = async (rating) => {
     const { data } = await axios.get('/api/trending');
     this.setState({ gifs: data });
   }
@@ -30,8 +31,10 @@ class Home extends Component {
   };
 
   handleSearch = async searchParams => {
+    console.log('handle search fired!')
     const searchQuery = { q: searchParams };
     const { data } = await axios.post('/api/search', searchQuery);
+    console.log('data', data);
     this.setState({ gifs: data });
   };
 
@@ -41,6 +44,7 @@ class Home extends Component {
   };
   render() {
     const { gifs } = this.state;
+    console.log(gifs)
     return (
       <div className="App">
         <h1>Welcome to the Gif Factory</h1>

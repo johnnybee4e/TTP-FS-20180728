@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 export default class SearchField extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       endpoint: '',
       input: '',
@@ -16,23 +15,15 @@ export default class SearchField extends Component {
   }
   handleChange = async evt => {
     evt.preventDefault();
+    const { name, value } = evt.target;
     this.setState({
-      [evt.target.name]: evt.target.value,
+      [name]: value,
     });
-    console.log(
-      'target name',
-      evt.target.name,
-      'input',
-      this.state.input,
-      'endpoint',
-      this.state.endpoint
-    );
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
     console.log('submit clicked');
-    console.log('props', this.props);
     const { endpoint, input } = this.state;
     console.log('endpoint!', endpoint);
     endpoint === 'search'
@@ -72,9 +63,3 @@ export default class SearchField extends Component {
     );
   }
 }
-
-// <label className="nav-item dropdown">How New?</label>
-//         <select onChange={this.props.handleChange}>
-//           <option value={true}>Newest to Oldest</option>
-//           <option value={false}>Oldest to Newest</option>
-//         </select>
