@@ -56,7 +56,7 @@ export default class SearchField extends Component {
           placeholder={`${this.state.endpoint}`}
           aria-label="Search"
         />
-        <button className="" type="submit">
+        <button className='search-bar-button' type="submit">
           Submit
         </button>
       </form>
