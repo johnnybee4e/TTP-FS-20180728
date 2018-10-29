@@ -10,9 +10,6 @@ class Home extends Component {
       rating: '',
     };
   }
-  componentDidMount() {
-    this.handleTrending();
-  }
 
   handleTrending = async rating => {
     const { data } = await axios.get('/api/trending');
@@ -50,11 +47,24 @@ class Home extends Component {
           handleTranslate={this.handleTranslate}
           handleTrending={this.handleTrending}
         />
-        <div id="all-gifs-container">
-          {gifs.map(gif => (
-            <GifCard key={gif.url} props={gif} />
-          ))}
-        </div>
+        {!gifs.length ? (
+          <div className='landing-page-ui-description'>
+            <h2>Let's find some gifs!</h2>
+            <p>
+              Use the search field above to find gifs or translate a phrase.
+            </p>
+            <p>
+              See what's trending by clicking 'What's hot!' or get a random gif
+              by clicking 'I'm feeling Giphy'
+            </p>
+          </div>
+        ) : (
+          <div id="all-gifs-container">
+            {gifs.map(gif => (
+              <GifCard key={gif.url} props={gif} />
+            ))}
+          </div>
+        )}
       </div>
     );
   }

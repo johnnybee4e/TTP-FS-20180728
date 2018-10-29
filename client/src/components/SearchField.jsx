@@ -37,7 +37,6 @@ export default class SearchField extends Component {
   render() {
     return (
       <form className="" id="form-container" onSubmit={this.handleSubmit}>
-        <label>Search or Translate?</label>
         <select
           onChange={evt => {
             evt.target.name = 'endpoint';
