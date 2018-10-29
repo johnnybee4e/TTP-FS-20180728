@@ -6,17 +6,20 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gifs: [],
-      randomGif: {},
+      gifs: []
     };
   }
   async componentDidMount() {
+    this.handleTrending()
+  }
+
+  handleTrending = async () => {
     const { data } = await axios.get('/api/trending');
     this.setState({ gifs: data });
   }
-
   handleRandom = async () => {
     const { data } = await axios.get('/api/random');
+    console.log(data)
     this.setState({ gifs: [data] });
   };
 
@@ -38,7 +41,6 @@ class Home extends Component {
   };
   render() {
     const { gifs } = this.state;
-    console.log('random gif from state', this.state.randomGif);
     return (
       <div className="App">
         <h1>Welcome to the Gif Factory</h1>
@@ -46,6 +48,7 @@ class Home extends Component {
           handleRandom={this.handleRandom}
           handleSearch={this.handleSearch}
           handleTranslate={this.handleTranslate}
+          handleTrending={this.handleTrending}
           handleHomeChange={this.handleHomeChange}
         />
         {gifs.map(gif => (

@@ -15,6 +15,7 @@ export default class SearchField extends Component {
     if (!this.state.endpoint) this.setState({ endpoint: 'search' });
   }
   handleChange = async evt => {
+    evt.preventDefault();
     this.setState({
       [evt.target.name]: evt.target.value,
     });
