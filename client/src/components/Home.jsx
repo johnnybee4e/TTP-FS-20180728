@@ -7,39 +7,56 @@ class Home extends Component {
     super(props);
     this.state = {
       gifs: [],
+      rating: ''
     };
   }
   async componentDidMount() {
-    const trendingGifs = await axios.get('/api/trending');
-    this.setState({ gifs: trendingGifs.data });
+    this.handleTrending()
   }
 
-  async handleRandom() {
-    const randomGif = axios.get('/api/random');
-    this.setState({ gifs: randomGif.data });
+  handleTrending = async (rating) => {
+    const { data } = await axios.get('/api/trending');
+    this.setState({ gifs: data });
   }
+  handleRandom = async () => {
+    const { data } = await axios.get('/api/random');
+    console.log(data)
+    this.setState({ gifs: [data] });
+  };
 
-  async handleTranslate(phrase) {
-    const translateGifs = await axios.post('/api/translate', phrase);
-    this.setState({ gifs: translateGifs.data });
-  }
+  handleTranslate = async phrase => {
+    const toTranslate = { s: phrase };
+    const { data } = await axios.post('/api/translate', toTranslate);
+    this.setState({ gifs: [data] });
+  };
 
-  async handleSearch(query) {
-    const searchGifs = await axios.post('/api/search', query);
-    this.setState({ gifs: searchGifs.data });
-  }
+  handleSearch = async searchParams => {
+    console.log('handle search fired!')
+    const searchQuery = { q: searchParams };
+    const { data } = await axios.post('/api/search', searchQuery);
+    console.log('data', data);
+    this.setState({ gifs: data });
+  };
 
-  handleChange(evt) {
+  handleHomeChange = async evt => {
     evt.preventDefault();
-  }
+    console.log('Home change fired');
+  };
   render() {
     const { gifs } = this.state;
+    console.log(gifs)
     return (
       <div className="App">
         <h1>Welcome to the Gif Factory</h1>
-        <SearchBar props="" />
+        <SearchBar
+          handleRandom={this.handleRandom}
+          handleSearch={this.handleSearch}
+          handleTranslate={this.handleTranslate}
+          handleTrending={this.handleTrending}
+          handleHomeChange={this.handleHomeChange}
+        />
         {gifs.map(gif => (
-          <GifCard key={gif.title} props={gif} />
+          <GifCard key={gif.url} props={gif} />
         ))}
       </div>
     );
