@@ -21,15 +21,15 @@ class Home extends Component {
     this.setState({ gifs: [data] });
   };
 
-  handleTranslate = async phrase => {
+  handleTranslate = async (phrase, rating) => {
     const toTranslate = { s: phrase };
     const { data } = await axios.post('/api/translate', toTranslate);
     this.setState({ gifs: [data] });
   };
 
-  handleSearch = async searchParams => {
+  handleSearch = async (searchParams, currRating) => {
     console.log('handle search fired!');
-    const searchQuery = { q: searchParams };
+    const searchQuery = { q: searchParams, rating: currRating };
     const { data } = await axios.post('/api/search', searchQuery);
     console.log('data', data);
     this.setState({ gifs: data });

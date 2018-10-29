@@ -7,6 +7,7 @@ export default class SearchField extends Component {
     this.state = {
       endpoint: '',
       input: '',
+      rating: '',
     };
   }
 
@@ -19,18 +20,18 @@ export default class SearchField extends Component {
     this.setState({
       [name]: value,
     });
+    console.log("state property", name, "is changed to", value);
   };
 
   handleSubmit = evt => {
     evt.preventDefault();
-    console.log('submit clicked');
-    const { endpoint, input } = this.state;
-    console.log('endpoint!', endpoint);
+    const { endpoint, input, rating } = this.state;
     endpoint === 'search'
-      ? this.props.handleSearch(input)
-      : this.props.handleTranslate(input);
+      ? this.props.handleSearch(input, rating)
+      : this.props.handleTranslate(input, rating);
     this.setState({
       input: '',
+      rating: ''
     });
   };
 
@@ -45,6 +46,19 @@ export default class SearchField extends Component {
         >
           <option value="search">Search</option>
           <option value="translate">Translate</option>
+        </select>
+        <select
+          onChange={evt => {
+            evt.target.name = 'rating';
+            this.handleChange(evt);
+          }}
+        >
+          <option value="''">All</option>
+          <option value="y">Y</option>
+          <option value="g">G</option>
+          <option value="pg">PG</option>
+          <option value="pg-13">PG-13</option>
+          <option value="r">R</option>
         </select>
         <input
           value={this.state.input}
