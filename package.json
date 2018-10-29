@@ -8,6 +8,7 @@
     "start-dev": "NODE_ENV='development' concurrently \"npm run start-server\" \"npm run start-client\"",
     "start-client": "cd client && npm start",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jonathan Rosado",
