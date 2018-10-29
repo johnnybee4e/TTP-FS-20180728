@@ -24,11 +24,20 @@ h1 {
   align-items: center;
 }
 
-.search-bar-button {
+.search-bar-button, .search-field-dropdown {
   background-color: #cb958e;
   height: 2rem;
   width: 5rem;
+  border: 1px solid black;
+  box-shadow: 1px 1px #282c34;
+  margin: 0 .25rem;
 }
+
+.search-bar-button {
+  border-radius: 10%;
+}
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -53,6 +53,7 @@ class Home extends Component {
             <p>
               Use the search field above to find gifs or translate a phrase.
             </p>
+            <p>You can filter search/translate results based on a rating scale</p>
             <p>
               See what's trending by clicking 'What's hot!' or get a random gif
               by clicking 'I'm feeling Giphy'
