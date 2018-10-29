@@ -22,14 +22,14 @@ export default function SearchBar(props) {
           type="button"
           onClick={handleTrending}
         >
-          Trending
+          What's hot!
         </button>
         <button
           className="search-bar-button"
           type="button"
           onClick={handleRandom}
         >
-          Random
+          I'm feelin' Giphy
         </button>
       </div>
     </nav>

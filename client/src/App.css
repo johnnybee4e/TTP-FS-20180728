@@ -1,21 +1,33 @@
 * {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.App {
-  
+body {
+  background-color: #9AC4F8;
 }
 
+h1 {
+  text-align: center;
+}
 .search-bar-container {
   display: flex;
   flex-flow: row;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 2rem;
+}
+
+.search-bar-button-container {
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .search-bar-button {
-  
+  background-color: #CB958E;
+  height: 2rem;
+  width: 5rem;
 }
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -27,6 +39,29 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#all-gifs-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: left;
+}
+.single-gif-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+  padding-top: .5rem;
+}
+
+.gif-copy-url {
+  font-size: 15px;
+  text-align: center;
+}
+
+.gif-url {
+  color: black;
+  font-size: 10px;
+  border: 1px black solid;
+  background-color: aliceblue;
 }
