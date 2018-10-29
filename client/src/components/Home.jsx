@@ -21,8 +21,8 @@ class Home extends Component {
     this.setState({ gifs: [data] });
   };
 
-  handleTranslate = async (phrase, rating) => {
-    const toTranslate = { s: phrase };
+  handleTranslate = async (phrase, currRating) => {
+    const toTranslate = { s: phrase, rating: currRating };
     const { data } = await axios.post('/api/translate', toTranslate);
     this.setState({ gifs: [data] });
   };
