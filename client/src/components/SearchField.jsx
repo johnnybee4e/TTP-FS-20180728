@@ -7,12 +7,14 @@ export default class SearchField extends Component {
     this.state = {
       endpoint: '',
       input: '',
+      rating: '',
     };
   }
 
   componentDidMount() {
     if (!this.state.endpoint) this.setState({ endpoint: 'search' });
   }
+
   handleChange = async evt => {
     evt.preventDefault();
     const { name, value } = evt.target;
@@ -23,22 +25,34 @@ export default class SearchField extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    console.log('submit clicked');
-    const { endpoint, input } = this.state;
-    console.log('endpoint!', endpoint);
+    const { endpoint, input, rating } = this.state;
     endpoint === 'search'
-      ? this.props.handleSearch(input)
-      : this.props.handleTranslate(input);
+      ? this.props.handleSearch(input, rating)
+      : this.props.handleTranslate(input, rating);
     this.setState({
       input: '',
+      rating: ''
     });
   };
 
   render() {
     return (
       <form className="" id="form-container" onSubmit={this.handleSubmit}>
-        <label>Search or Translate?</label>
-        <select
+      <label>Rating Filter</label>
+      <select className='search-field-dropdown'
+      onChange={evt => {
+        evt.target.name = 'rating';
+        this.handleChange(evt);
+      }}
+    >
+      <option value="''">All</option>
+      <option value="y">Y</option>
+      <option value="g">G</option>
+      <option value="pg">PG</option>
+      <option value="pg-13">PG-13</option>
+      <option value="r">R</option>
+    </select>
+        <select className='search-field-dropdown'
           onChange={evt => {
             evt.target.name = 'endpoint';
             this.handleChange(evt);
