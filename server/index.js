@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const compression = require("compression");
 const { db, User } = require("./db");
@@ -47,7 +47,7 @@ const createApp = () => {
   app.use(compression());
 
   // session/cookie middleware
-  app.use(cookieParser());
+  // app.use(cookieParser());
   app.use(
     session({
       secret: process.env.SESSION_SECRET || "show me the money",
@@ -95,7 +95,7 @@ const startListening = () => {
     console.log(`Alive and listening on port ${PORT}`)
   );
 };
-const syncDb = db.sync();
+const syncDb = () => db.sync();
 
 async function bootApp() {
   await sessionStore.sync();
