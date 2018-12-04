@@ -14,6 +14,7 @@
   "author": "Jonathan Rosado",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
@@ -25,6 +26,13 @@
     "passport": "^0.4.0",
     "pg": "^7.7.1",
     "pg-hstore": "^2.3.2",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^4.41.2"
   },
   "devDependencies": {
