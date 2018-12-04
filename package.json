@@ -1,7 +1,7 @@
 {
-  "name": "amex-code-test",
+  "name": "stock-up",
   "version": "1.0.0",
-  "description": "Server for React App leveraging GIPHY API",
+  "description": "Stock Portfolio App",
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run start-client\"",
@@ -15,10 +15,17 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "connect-session-sequelize": "^6.0.0",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.7",
+    "passport": "^0.4.0",
+    "pg": "^7.7.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.41.2"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
