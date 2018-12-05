@@ -5,14 +5,6 @@ const Portfolio = require("./portfolio");
 const crypto = require("crypto");
 
 const User = db.define("user", {
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
