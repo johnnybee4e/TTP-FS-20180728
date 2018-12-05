@@ -1,4 +1,3 @@
-export { default as Home } from './Home';
-export { default as GifCard } from './GifCard';
-export { default as SearchField } from './SearchField';
-export { default as SearchBar } from './SearchBar';
+export { default as Navbar } from "./Navbar";
+export { default as UserHome } from "./UserHome";
+export { Login, Signup } from "./Auth-form";
