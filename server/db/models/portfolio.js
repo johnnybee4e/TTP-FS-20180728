@@ -2,19 +2,20 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Portfolio = db.define("portfolio", {
+  stockSymbol: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   quantity: {
     type: Sequelize.INTEGER,
+    defaultValue: 0,
     validate: {
-      min: 1,
       isInt: true
     }
   }
 });
 
-Portfolio.prototype.updateQuantity = function(quantity) {
-  console.log("portfolio quantity", this.quantity, "quantity to add", quantity);
-  this.quantity === null
-    ? (this.quantity = quantity)
-    : (this.quantity += quantity);
+Portfolio.prototype.updateQuantity = function(numShares) {
+  this.quantity += numShares;
 };
 module.exports = Portfolio;
