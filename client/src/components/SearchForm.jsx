@@ -7,45 +7,47 @@ class SearchForm extends Component {
     super(props);
 
     this.state = {
-      stock: "",
-      price: ""
+      stockSymbol: "",
+      successful: false,
+      stockQuote: {}
     };
   }
-  handleSubmit = async evt => {
-      evt.preventDefault();
+  handleSearch = async evt => {
+    evt.preventDefault();
     try {
-      const { data }  = await axios.get(
+      const { data } = await axios.get(
         `https://api.iextrading.com/1.0/stock/${
-          this.state.stock
-        }/batch?types=price`
+          this.state.stockSymbol
+        }/batch?types=quote`
       );
-      this.setState({ price: data.price });
+      console.log("axios result", data.quote);
+      this.setState({ successful: true });
+      this.setState({ stockQuote: data.quote });
     } catch {
-        alert('Invalid stock symbol. Try again.')
+      alert("Invalid stock symbol. Try again.");
     }
   };
 
   handleChange = evt => {
     evt.preventDefault();
     const { value } = evt.target;
-    this.setState({ stock: value });
+    this.setState({ stockSymbol: value });
   };
   render() {
-    console.log("stock:", this.state.stock);
-    console.log("price:", typeof this.state.price);
+    console.log("stockSymbol:", this.state.stockSymbol);
+    console.log("stockQuote:", this.state.stockQuote);
+    let { stockQuote } = this.state;
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          {this.state.price ? <p>Price: {this.state.price}</p> : null}
+        <form onSubmit={this.handleSearch}>
+          {this.state.successful ? <p>Quote {stockQuote.symbol}</p> : null}
           <input
             onChange={this.handleChange}
             name="stock"
             type="text"
             placeholder="Search Stock"
           />
-          <button type="sumbit">
-            Search
-          </button>
+          <button type="sumbit">Search</button>
         </form>
       </div>
     );
