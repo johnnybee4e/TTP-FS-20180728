@@ -1,8 +1,11 @@
-const Portfolio = require("./Portfolio");
-const Stock = require("./Stock");
-const User = require("./User");
+const Portfolio = require("./portfolio");
+const Ledger = require("./ledger");
+const User = require("./user");
 
-User.belongsToMany(Stock, { through: "portfolio" });
-Stock.belongsToMany(User, { through: "portfolio" });
+Portfolio.belongsTo(User);
+User.hasMany(Portfolio);
 
-module.exports = { Portfolio, Stock, User };
+Ledger.belongsTo(User);
+User.hasMany(Ledger);
+
+module.exports = { Portfolio, Ledger, User };

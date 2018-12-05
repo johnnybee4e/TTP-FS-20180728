@@ -1,7 +1,5 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
-const Stock = require("./stock");
-const Portfolio = require("./portfolio");
 const crypto = require("crypto");
 
 const User = db.define("user", {
@@ -50,42 +48,6 @@ User.prototype.correctPassword = function(candidatePwd) {
 User.prototype.updateBalance = function(cost) {
   if (cost > this.balance) return "Insufficient Funds.";
   this.balance -= cost;
-};
-
-User.prototype.updatePortfolio = async function(
-  stockName,
-  stockSymbol,
-  quantity
-) {
-  try {
-    let portfolioToUpdate;
-
-    // find or create a new row on stock table for stock being purchased
-    const stock = await Stock.findOrCreate({
-      where: { name: stockName, symbol: stockSymbol }
-    });
-
-    // using Sequelize instance method to get current portfolio stocks for user
-    let userPortfolio = await this.getStocks();
-
-    // if there are no stocks in portfolio, we add current stock
-    if (!userPortfolio.length) await this.addStock(stock[0]);
-
-    // use the user's information and the stock that they want to find portfolio line item
-    // on portfolio table.
-    portfolioToUpdate = await Portfolio.findOne({
-      where: {
-        userId: this.id,
-        stockId: stock[0].id
-      }
-    });
-
-    // using created portfolio's instance mthod to set/update quantity
-    await portfolioToUpdate.updateQuantity(quantity);
-    return portfolioToUpdate.quantity;
-  } catch (err) {
-    console.error(err);
-  }
 };
 
 /**
