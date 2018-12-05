@@ -18,7 +18,7 @@ const Ledger = db.define("ledger", {
   total: {
     type: Sequelize.VIRTUAL,
     get() {
-      return this.getDataValue(stockPrice) * this.getDataValue(quantity);
+      return this.stockPrice * this.quantity;
     }
   }
 });
